@@ -3,9 +3,12 @@ import pandas as pd
 import joblib
 
 def analyse(data):
-    model = joblib.load('./training/kidneystone.pkl')
-    scaler = joblib.load('./training/kidneystonescaler.pkl')
+    #model = joblib.load('./training/kidneystone.pkl')
+    #scaler = joblib.load('./training/kidneystonescaler.pkl')
 
+    model = joblib.load('/home/maniakss/mysite/training/kidneystone.pkl')
+    scaler = joblib.load('/home/maniakss/mysite/training/kidneystonescaler.pkl')
+    
     column_names = ['gravity', 'ph', 'osmo', 'cond', 'urea', 'calc']
     df = pd.DataFrame(data, columns=column_names)
 

@@ -1,5 +1,5 @@
 from flask import Flask, request
-import python.urinalysis.urinalysis as urinalysis
+import urinalysis
 
 app = Flask(__name__)
 
