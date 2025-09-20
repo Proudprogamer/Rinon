@@ -1,8 +1,8 @@
 import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
-//const API_KEY:string = process.env["GEM_API_KEY"] as string
-const API_KEY = "AIzaSyBX9ZJlv2-IfCdLZclALgVCE4uPtLlbhdU";
+const API_KEY = process.env["GEM_API_KEY"];
+//const API_KEY = "AIzaSyBX9ZJlv2-IfCdLZclALgVCE4uPtLlbhdU"
 async function analyzeKidneyCT(imagePath, apiKey) {
     try {
         const imageData = fs.readFileSync(imagePath);
