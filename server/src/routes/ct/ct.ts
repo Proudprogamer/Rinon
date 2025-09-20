@@ -1,11 +1,10 @@
 import  express, { type Request, type Response }  from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import fs from "fs"
 import path from "path"
 import { PrismaClient } from "@prisma/client";
 import multer from "multer"
 import gemCt from "../../utils/gemCt/gemCt.js";
-
+import supabase from "../../utils/supabase/supabase.js"
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,16 +12,8 @@ const ctRouter = express.Router();
 
 const prismaclient = new PrismaClient();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-
 
 
 ctRouter.post('/upload', upload.single('image'), async(req :Request, res : Response) : Promise<void> => {
@@ -31,15 +22,48 @@ ctRouter.post('/upload', upload.single('image'), async(req :Request, res : Respo
         return;
     }
 
-    const filePath = req.file.path;
-    const result = await gemCt(filePath);
+    try {
+    const fileExtension = req.file.originalname.split('.').pop();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const fileName = `${Date.now()}-${randomString}.${fileExtension}`;
+
+    
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from("scans")
+      .upload(fileName, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false
+      });
+
+    if (error) {
+      console.error('Supabase upload error:', error);
+      res.status(500).json({ error: 'Failed to upload image to storage' });
+      return;
+    }
+
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from("scans")
+      .getPublicUrl(fileName);
+
+    const tempFilePath = path.join('uploads', fileName);
+    fs.writeFileSync(tempFilePath, req.file.buffer);
+    const result = await gemCt(tempFilePath);
+    fs.unlinkSync(tempFilePath);
+
     console.log(result);
-    console.log('File uploaded:', req.file);
+    console.log('File uploaded to Supabase:', fileName);
+    
     res.status(200).json({
-        message: 'Analysis Generated successfully!',
-        filename: req.file.filename,
-        analysis_generated: result,
+      message: 'Analysis Generated successfully!',
+      filename: fileName,
+      supabaseUrl: publicUrlData.publicUrl,
+      analysis_generated: result,
     });
+  } catch(e){
+    console.log(e);
+  } 
 });
 
 export default ctRouter;

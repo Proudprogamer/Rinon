@@ -6,11 +6,13 @@ import axios from "axios";
 interface data {
     message: string,
     filename: string,
+    supabaseUrl: string,
     analysis_generated: {
         number_of_stones: number,
         sizepos: spobj[],
         general_analysis: string,
     }
+
 }
 
 interface spobj {
@@ -53,6 +55,7 @@ function Ct(){
                 {data && 
                     <div>
                         <p>{data.message}</p>
+                        <img src={data.supabaseUrl}></img>
                         <p>Stones: {data.analysis_generated.number_of_stones}</p>
                         {data.analysis_generated.sizepos.map((obj)=>{
                             return (<p>Stone -- {obj.size} -- {obj.location}</p>)
