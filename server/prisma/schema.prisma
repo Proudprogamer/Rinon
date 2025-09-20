@@ -43,6 +43,8 @@ model Patients {
 
 model Disease {
   id             String     @id @default(uuid())
+  name           String
+  type           String
 
   diagnoserid    String
   patientid      String

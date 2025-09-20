@@ -1,5 +1,7 @@
 import express from "express"
 import authRouter from "./routes/auth.js";
+import patientRouter from "./routes/patient/patient.js";
+import diseaseRouter from "./routes/disease/disease.js";
 import dotenv from "dotenv";
 import cors from "cors"
 dotenv.config()
@@ -14,6 +16,8 @@ app.use(express.json());
 
 
 app.use('/auth/v1', authRouter);
+app.use('/patient', patientRouter);
+app.use('/disease', diseaseRouter);
 
 
 app.listen(port, ()=>{
