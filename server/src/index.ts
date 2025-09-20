@@ -1,6 +1,6 @@
 import express from "express"
 import authRouter from "./routes/auth.js";
-import ctRouter from "./routes/ct.js"
+import ctRouter from "./routes/ct/ct.js"
 import dotenv from "dotenv";
 import cors from "cors"
 dotenv.config()
