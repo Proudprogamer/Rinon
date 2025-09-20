@@ -77,7 +77,8 @@ authRouter.post('/sign-up', async(req :Request, res : Response) : Promise<void> 
                 data:{
                     name :userCreds.name,
                     email : userCreds.email,
-                    password: userCreds.password
+                    password: userCreds.password,
+                    
                 }
             });
 
@@ -93,7 +94,7 @@ authRouter.post('/sign-up', async(req :Request, res : Response) : Promise<void> 
 
 authRouter.post('/sign-in', async(req :Request, res : Response) : Promise<void> => {
 
-    const userCreds = req.body.creds;
+    const userCreds : credsIn = req.body.creds;
 
     if(userCreds.type == "Doctor")
     {
@@ -165,5 +166,28 @@ authRouter.post('/sign-in', async(req :Request, res : Response) : Promise<void> 
             res.status(500).json({type : "error", message : "Invalid email or Password"});
     }
 });
+
+authRouter.post('/verify-token', async(req :Request, res : Response) : Promise<void> => {
+    const token:string = req.body.token;
+
+    try {
+        const decoded:any = jwt.verify(token, JWT_SECRET);
+    
+        if(decoded.id)
+        {
+            res.status(200).json({isvalid : "true", user : decoded});
+        }
+        else
+        {
+            res.status(500).json({isvalie : "false"});
+        }
+    }
+    catch(e: any)
+    {
+        if(e instanceof Error)
+            res.status(500).json({type : "error", message :"error in validating token", error : e.message});
+    }
+
+})
 
 export default authRouter;
