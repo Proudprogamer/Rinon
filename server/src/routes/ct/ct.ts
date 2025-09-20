@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import path from "path"
 import { PrismaClient } from "@prisma/client";
 import multer from "multer"
-import gemCt from "../../utils/gemCt.js";
+import gemCt from "../../utils/gemCt/gemCt.js";
 
 import dotenv from "dotenv";
 dotenv.config();
