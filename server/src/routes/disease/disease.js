@@ -3,14 +3,15 @@ import express, {} from "express";
 const diseaseRouter = express.Router();
 const prismaclient = new PrismaClient();
 diseaseRouter.post('/create-disease', async (req, res) => {
-    const creds = req.body.creds;
+    const creds = req.body;
+    console.log(creds);
     try {
         const response = await prismaclient.disease.create({
             data: {
                 name: creds.name,
                 type: creds.type,
-                diagnoserid: creds.diagnoserid,
-                patientid: creds.patientid
+                diagnoserid: creds.diagnoserId,
+                patientid: creds.patientId
             }
         });
         if (response) {
@@ -32,6 +33,22 @@ diseaseRouter.post('/get-diseases', async (req, res) => {
         });
         if (response)
             res.status(200).json({ type: "success", message: "fetched diseases", diseases: response });
+    }
+    catch (e) {
+        if (e instanceof Error)
+            res.status(500).json({ type: "error", message: "failed to fetch diseases", error: e.message });
+    }
+});
+diseaseRouter.post('/get-disease-by-id', async (req, res) => {
+    const diseaseId = req.body.diseaseId;
+    try {
+        const response = await prismaclient.disease.findFirst({
+            where: {
+                id: diseaseId
+            }
+        });
+        if (response)
+            res.status(200).json({ type: "success", message: "fetched diseases", disease: response });
     }
     catch (e) {
         if (e instanceof Error)

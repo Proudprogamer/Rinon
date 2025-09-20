@@ -12,7 +12,6 @@ interface data {
         sizepos: spobj[],
         general_analysis: string,
     }
-
 }
 
 interface spobj {

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from 'next/navigation';
 import axios from "axios";
 import { 
   Search, 
@@ -35,6 +36,7 @@ function DiagnoserDashboard() {
   const [isCreatingDisease, setIsCreatingDisease] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const {logout, user} = useAuth();
+  const router = useRouter();
 
   const resetPatientView=()=>{
     setShowPatientDiseases(false);
@@ -105,7 +107,7 @@ function DiagnoserDashboard() {
 
   const handleDiseaseClick = (disease: any) => {
     setIsNavigating(true);
-    window.location.href = `/dashboard/disease/${disease.id}`;
+    router.push(`/dashboard/disease/${disease.id}`);
   };
 
   const openCreateDiseaseModal = () => {
@@ -118,29 +120,28 @@ function DiagnoserDashboard() {
     
     setIsCreatingDisease(true);
     try {
-      const diseaseData = {
+      const creds = {
         patientId: selectedPatient.id,
         name: newDisease.name,
-        type: newDisease.type
+        type: newDisease.type,
+        //@ts-ignore
+        diagnoserId: user.id,
       };
       
-      console.log("Creating disease with data:", diseaseData);
+      console.log("Creating disease with data:", creds);
       
       // TODO: Replace this with your actual API call to create disease
-      const response = await fetch("http://localhost:5000/disease/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
-        body: JSON.stringify(diseaseData)
-      });
+      const response = await axios.post(
+        "http://localhost:5000/disease/create-disease",
+          creds,
+          {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`
+              }
+          }
+        );
       
-      if (!response.ok) {
-        throw new Error("Failed to create disease");
-      }
-      
-      const result = await response.json();
+      const result = response.data;
       console.log("Disease created successfully:", result);
       
       // Get the disease ID from the response
@@ -150,7 +151,7 @@ function DiagnoserDashboard() {
       resetCreateDisease();
       
       // Route to dynamic disease page with the disease ID
-      window.location.href = `/dashboard/disease/${diseaseId}`;
+      router.push(`/dashboard/disease/${diseaseId}`);
       
     } catch (error) {
       console.error("Failed to create disease:", error);

@@ -48,25 +48,9 @@ model Disease {
 
   diagnoserid    String
   patientid      String
-
+  analysis       String?
   diagnoser      Diagnoser  @relation(fields: [diagnoserid], references: [id])
   patient        Patients   @relation(fields: [patientid], references: [id])
-
-  files Files[]
 }
 
-model  Files {
-  id             String     @id @default(uuid())
-  url            String 
-  metadata       String
-  uploadDate     DateTime
 
-
-  diseaseid     String
-  disease       Disease     @relation(fields: [diseaseid], references: [id])
-}
-
-model Analysis {
-  id String @id @default(uuid())
-
-}
