@@ -37,8 +37,8 @@ model Patients {
   email          String     @unique
   password       String
 
-
   diseases Disease[]
+
 }
 
 model Disease {

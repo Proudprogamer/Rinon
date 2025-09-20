@@ -1,6 +1,7 @@
+"use client"
 import { ReactNode, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 
@@ -21,7 +22,7 @@ export default function ProtectedRoute(
 
     useEffect(()=>{
         if (!user) 
-            router.replace('/login');
+            router.replace('/');
         
         if(user)
         {

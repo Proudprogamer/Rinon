@@ -1,5 +1,6 @@
+"use client"
 import { createContext, ReactNode, useContext, useState } from "react";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import axios from "axios";
 
 
 //this is how the user is being stored in our database
@@ -23,19 +24,26 @@ const AuthContext = createContext<AuthContextProps | null>(null);
 
 export const  AuthProvider = ({children} : {children : ReactNode}) =>{
 
-    const JWT_SECRET:string = process.env.NEXT_PUBLIC_JWT_SECRET as string;
     const [user, setuser] = useState<User | null>(null);
 
     const login = async(token :string)=>{
 
-        const decoded:any = jwt.verify(token, JWT_SECRET);
+        try { 
+            const response = await axios.post('http://localhost:5000/auth/v1/verify-token',{
+                token : token
+            });
 
-        if(decoded.id)
-        {
-            setuser(decoded);
-            localStorage.setItem('token', token);
+            if(response.data)
+            {
+                setuser(response.data.user);
+                localStorage.setItem('token', token);
+            }
         }
-
+        catch(e: any)
+        {
+            if(e instanceof Error)
+                setuser(null);
+        }
     }
 
     const logout = ()=>{

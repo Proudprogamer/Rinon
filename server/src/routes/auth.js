@@ -43,7 +43,7 @@ authRouter.post('/sign-up', async (req, res) => {
                 data: {
                     name: userCreds.name,
                     email: userCreds.email,
-                    password: userCreds.password
+                    password: userCreds.password,
                 }
             });
             res.status(201).json({ type: "success", message: "patient created" });
@@ -109,6 +109,22 @@ authRouter.post('/sign-in', async (req, res) => {
         }
         else
             res.status(500).json({ type: "error", message: "Invalid email or Password" });
+    }
+});
+authRouter.post('/verify-token', async (req, res) => {
+    const token = req.body.token;
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        if (decoded.id) {
+            res.status(200).json({ isvalid: "true", user: decoded });
+        }
+        else {
+            res.status(500).json({ isvalie: "false" });
+        }
+    }
+    catch (e) {
+        if (e instanceof Error)
+            res.status(500).json({ type: "error", message: "error in validating token", error: e.message });
     }
 });
 export default authRouter;
