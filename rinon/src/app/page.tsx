@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Users, Stethoscope, Search, Shield, Clock, CheckCircle } from 'lucide-react';
 import { useAuth } from './protected/AuthProvider';
+import { useRouter } from 'next/navigation';
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
   visible: { 
@@ -43,6 +44,7 @@ const slideInRight = {
 };
 
 export default function Home() {
+  const router = useRouter();
   const { user } = useAuth();
 
   let type ="";
@@ -142,6 +144,7 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.05, x: 5 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={()=>{router.push('/auth/signup');}}
                   className="flex items-center justify-center px-8 py-4 bg-red-800 text-white rounded-lg hover:bg-red-900 transition-all duration-300 shadow-lg group"
                 >
                   Get Started
@@ -150,6 +153,7 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={()=>{window.open('https://github.com/Proudprogamer/Rinon', '_blank', 'noopener,noreferrer');}}
                   className="px-8 py-4 border-2 border-red-200 text-red-800 rounded-lg hover:bg-red-50 transition-all duration-300"
                 >
                   Learn More
