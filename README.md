@@ -1,8 +1,8 @@
 # Project Rinon
 
-Team ID: NH10
-Team Name: Galactic Destroyers
-Theme: AI in Healthcare
+    - Team ID: NH10
+    - Team Name: Galactic Destroyers
+    - Theme: AI in Healthcare
 
 ![Project Link]("https://rinon-z4kl.vercel.app/")
 
