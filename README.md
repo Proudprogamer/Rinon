@@ -1,5 +1,9 @@
 # Project Rinon
 
+Team ID: NH10
+Team Name: Galactic Destroyers
+Theme: AI in Healthcare
+
 A Project Built by Team **Galactic Destroyers** under the **AI in Healthcare** theme at the **NeuraX 24h Hackathon**
 
 ----
