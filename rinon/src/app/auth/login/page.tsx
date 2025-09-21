@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, Loader2, ArrowLeft, AlertCircle } from "lucide-react";
 
+//login page
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
