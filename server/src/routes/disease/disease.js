@@ -55,5 +55,23 @@ diseaseRouter.post('/get-disease-by-id', async (req, res) => {
             res.status(500).json({ type: "error", message: "failed to fetch diseases", error: e.message });
     }
 });
+diseaseRouter.post('/get-patient-diseases', async (req, res) => {
+    const patientId = req.body.patientId;
+    try {
+        const response = await prismaclient.disease.findMany({
+            where: {
+                patientid: patientId
+            }
+        });
+        if (response) {
+            res.status(200).json({ type: "success", message: "diseases fetched successfully", diseases: response });
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            res.status(500).json({ type: "error", message: "failed to fetch diseases", error: e.message });
+        }
+    }
+});
 export default diseaseRouter;
 //# sourceMappingURL=disease.js.map

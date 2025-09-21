@@ -1,5 +1,5 @@
 "use client"
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -26,6 +26,11 @@ export const  AuthProvider = ({children} : {children : ReactNode}) =>{
 
     const [user, setuser] = useState<User | null>(null);
 
+    useEffect(() => {
+        const token:string = localStorage.getItem('token') as string;
+        login(token);
+        }, []);
+
     const login = async(token :string)=>{
 
         try { 
@@ -41,6 +46,7 @@ export const  AuthProvider = ({children} : {children : ReactNode}) =>{
         }
         catch(e: any)
         {
+            localStorage.removeItem('token');
             if(e instanceof Error)
                 setuser(null);
         }

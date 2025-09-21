@@ -22,6 +22,10 @@ function Login() {
     if (user && type === "Diagnoser") {
       router.push("/dashboard/diagnoser");
     }
+
+    if(user && type === "Patient"){
+        router.push("/dashboard/patient");
+    }
   }, [user, type, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +50,6 @@ function Login() {
 
   const userTypes = [
     { value: "Patient", icon: User, description: "Access your medical records" },
-    { value: "Doctor", icon: User, description: "Manage patient care" },
     { value: "Diagnoser", icon: User, description: "Analyze scans and tests" }
   ];
 

@@ -19,6 +19,7 @@ import {
   Filter
 } from "lucide-react";
 import { useAuth } from "@/app/protected/AuthProvider";
+import ProtectedRoute from "@/app/protected/ProtectedRoute";
 
 function DiagnoserDashboard() {
   const [patients, setPatients] = useState<any[]>([]);
@@ -186,6 +187,7 @@ function DiagnoserDashboard() {
   }
 
   return (
+    <ProtectedRoute allowedRoles="Diagnoser">
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-stone-50">
       {/* Header */}
       <motion.header
@@ -279,7 +281,7 @@ function DiagnoserDashboard() {
                     placeholder="Search by name or email..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 w-64"
+                    className="text-gray-700 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 w-64"
                   />
                 </div>
                 <motion.button
@@ -544,7 +546,7 @@ function DiagnoserDashboard() {
                     type="text"
                     value={newDisease.name}
                     onChange={(e) => setNewDisease({ ...newDisease, name: e.target.value })}
-                    className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    className="text-gray-700 w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     placeholder="Enter disease name..."
                   />
                 </div>
@@ -633,6 +635,7 @@ function DiagnoserDashboard() {
         )}
       </AnimatePresence>
     </div>
+    </ProtectedRoute>
   );
 }
 

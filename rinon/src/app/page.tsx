@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Users, Stethoscope, Search, Shield, Clock, CheckCircle } from 'lucide-react';
-
+import { useAuth } from './protected/AuthProvider';
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
   visible: { 
@@ -43,6 +43,15 @@ const slideInRight = {
 };
 
 export default function Home() {
+  const { user } = useAuth();
+
+  let type ="";
+
+  if(user)
+  {
+    type = user.type == "Diagnoser" ? "diagnoser" : "patient";
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-stone-50">
       {/* Navigation */}
@@ -59,25 +68,44 @@ export default function Home() {
           >
             Rinon
           </motion.div>
-          
+
+          {user ? 
+          <>
           <div className="flex items-center space-x-4">
-            <motion.a
-              href="/auth/login"
-              whileHover={{ scale: 1.05, backgroundColor: "#7f1d1d" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 text-red-800 border border-red-200 rounded-lg hover:bg-red-800 hover:text-white transition-all duration-300 inline-block"
-            >
-              Login
-            </motion.a>
-            <motion.a
-              href="/auth/signup"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900 transition-all duration-300 shadow-lg inline-block"
-            >
-              Sign Up
-            </motion.a>
-          </div>
+              <motion.a
+                href={`/dashboard/${type}`}
+                whileHover={{ scale: 1.05, backgroundColor: "#7f1d1d" }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 text-red-800 border border-red-200 rounded-lg hover:bg-red-800 hover:text-white transition-all duration-300 inline-block"
+              >
+                Dashboard
+              </motion.a>
+              
+            </div>
+            
+          </>:
+          <>
+          <div className="flex items-center space-x-4">
+              <motion.a
+                href="/auth/login"
+                whileHover={{ scale: 1.05, backgroundColor: "#7f1d1d" }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 text-red-800 border border-red-200 rounded-lg hover:bg-red-800 hover:text-white transition-all duration-300 inline-block"
+              >
+                Login
+              </motion.a>
+              <motion.a
+                href="/auth/signup"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900 transition-all duration-300 shadow-lg inline-block"
+              >
+                Sign Up
+              </motion.a>
+            </div>
+          </>}
+          
+          
         </div>
       </motion.nav>
 

@@ -73,7 +73,12 @@ ctRouter.post('/upload', upload.single('image'), async(req :Request, res : Respo
 
         if(response)
         {
-            res.status(200).json({type : "success", message:"disease created successfully", id : response.id});
+            res.status(200).json({
+              message: 'Analysis Generated successfully!',
+              filename: fileName,
+              supabaseUrl: publicUrlData.publicUrl,
+              analysis_generated: result,
+            });
         }
         
     }
@@ -83,12 +88,6 @@ ctRouter.post('/upload', upload.single('image'), async(req :Request, res : Respo
             res.status(500).json({type : "error", message:"failed to create disease", error : e.message});
     }  
 
-    res.status(200).json({
-      message: 'Analysis Generated successfully!',
-      filename: fileName,
-      supabaseUrl: publicUrlData.publicUrl,
-      analysis_generated: result,
-    });
   } catch(e){
     console.log(e);
   } 

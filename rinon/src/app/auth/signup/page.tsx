@@ -64,7 +64,6 @@ function Signup() {
 
   const userTypes = [
     { value: "Patient", icon: User, description: "Access your medical records" },
-    { value: "Doctor", icon: User, description: "Manage patient care" },
     { value: "Diagnoser", icon: User, description: "Analyze scans and tests" }
   ];
 
