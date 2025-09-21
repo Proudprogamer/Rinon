@@ -4,8 +4,6 @@
     - Team Name: Galactic Destroyers
     - Theme: AI in Healthcare
 
-![Project Link]("https://rinon-z4kl.vercel.app/")
-
 A Project Built by Team **Galactic Destroyers** under the **AI in Healthcare** theme at the **NeuraX 24h Hackathon**
 
 ----
