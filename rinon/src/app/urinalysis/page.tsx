@@ -20,7 +20,7 @@ function Urinalysis(){
 
         try{
             const response = await axios.post(
-                "http://localhost:5000/urinalysis/v1/upload",
+                "https://rinon.onrender.com/urinalysis/v1/upload",
                 data
             );
             console.log(response.data);
