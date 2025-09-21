@@ -49,7 +49,7 @@ function DiagnoserDashboard() {
     const getPatients = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/patient/get-patients", {
+        const response = await fetch("https://rinon.onrender.com/patient/get-patients", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         });
         
@@ -85,7 +85,7 @@ function DiagnoserDashboard() {
   const fetchPatientDiseases = async (patientId: string) => {
     setIsLoadingDiseases(true);
     try {
-      const response = await axios.post("http://localhost:5000/disease/get-diseases", {
+      const response = await axios.post("https://rinon.onrender.com/disease/get-diseases", {
         patientId: patientId
       });
       
@@ -133,7 +133,7 @@ function DiagnoserDashboard() {
       
       // TODO: Replace this with your actual API call to create disease
       const response = await axios.post(
-        "http://localhost:5000/disease/create-disease",
+        "https://rinon.onrender.com/disease/create-disease",
           creds,
           {
               headers: {

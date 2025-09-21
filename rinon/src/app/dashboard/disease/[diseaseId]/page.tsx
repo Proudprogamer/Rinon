@@ -73,7 +73,7 @@ export default function DiseaseDetailsPage() {
           diseaseId: diseaseId
         }
         const response = await axios.post(
-          "http://localhost:5000/disease/get-disease-by-id",
+          "https://rinon.onrender.com/disease/get-disease-by-id",
           requestData
         );
         console.log(response.data);
@@ -102,7 +102,7 @@ export default function DiseaseDetailsPage() {
     formData.append('diseaseId', diseaseId);
     try {
       const response = await axios.post(
-        "http://localhost:5000/ct/v1/upload",
+        "https://rinon.onrender.com/ct/v1/upload",
         formData
       );
       console.log(response.data);
@@ -136,7 +136,7 @@ export default function DiseaseDetailsPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/urinalysis/v1/upload",
+        "https://rinon.onrender.com/urinalysis/v1/upload",
         requestData
       );
       console.log(response.data);

@@ -34,7 +34,7 @@ export const  AuthProvider = ({children} : {children : ReactNode}) =>{
     const login = async(token :string)=>{
 
         try { 
-            const response = await axios.post('http://localhost:5000/auth/v1/verify-token',{
+            const response = await axios.post('https://rinon.onrender.com/auth/v1/verify-token',{
                 token : token
             });
 

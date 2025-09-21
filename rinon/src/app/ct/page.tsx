@@ -31,7 +31,7 @@ function Ct(){
         formData.append('image', file);
         try{
             const response = await axios.post(
-                "http://localhost:5000/ct/v1/upload",
+                "https://rinon.onrender.com/ct/v1/upload",
                 formData
             );
             console.log(response.data);

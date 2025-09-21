@@ -33,7 +33,7 @@ function Patient() {
     setIsLoading(true);
     try {
       if (user) {
-        const response = await fetch('http://localhost:5000/disease/get-patient-diseases', {
+        const response = await fetch('https://rinon.onrender.com/disease/get-patient-diseases', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

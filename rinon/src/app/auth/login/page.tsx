@@ -34,7 +34,7 @@ function Login() {
     setError("");
     
     try {
-      const { data } = await axios.post("http://localhost:5000/auth/v1/sign-in", {
+      const { data } = await axios.post("https://rinon.onrender.com/auth/v1/sign-in", {
         creds: { email, password, type },
       });
       await login(data.token);

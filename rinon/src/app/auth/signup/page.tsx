@@ -30,7 +30,7 @@ function Signup() {
         },
       };
       
-      const response = await fetch("http://localhost:5000/auth/v1/sign-up", {
+      const response = await fetch("https://rinon.onrender.com/auth/v1/sign-up", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
