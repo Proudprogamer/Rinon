@@ -15,22 +15,19 @@ Project Rinon operates with a client-server architecture. Users (patients, docto
 ----
 
 ### Home Page
-![Home]("./images/home.png")
-----
+![Home](./images/home.png)
+
 ### Kidney CT Analysis
-![Analysis]("./images/analysis.png")
-----
+![Analysis](./images/analysis.png)
+
 ### Diagnoser Dashboard
-![Diagnoser]("./images/diag_dash.png")
-----
+![Diagnoser](./images/diag_dash.png)
+
 ### Patient Dashboard
-![Home]("./images/patiend_dash.png")
-----
-### Kidney CT Analysis
-![Analysis]("./images/analysis.png")
-----
+![Patient Dashboard](./images/patiend_dash.png)
+
 ### Uploading of File
-![Upload]("./images/upload_ct.png")
+![Upload](./images/upload_ct.png)
 
 ----
 
