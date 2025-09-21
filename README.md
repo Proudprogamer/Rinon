@@ -24,7 +24,7 @@ Project Rinon operates with a client-server architecture. Users (patients, docto
 ![Diagnoser](./images/diag_dash.png)
 
 ### Patient Dashboard
-![Patient Dashboard](./images/patiend_dash.png)
+![Patient Dashboard](./images/patient_dash.png)
 
 ### Uploading of File
 ![Upload](./images/upload_ct.png)
@@ -33,28 +33,28 @@ Project Rinon operates with a client-server architecture. Users (patients, docto
 
 ## Folder Structure
 
-.
-├── python/urinalysis/
-│   ├── training/
-│   ├── server.py
-│   └── urinalysis.py
-├── rinon/
-│   ├── .next/
-│   ├── node_modules/
-│   ├── public/
-│   └── src/app/
-│       ├── auth/
-│       ├── ct/
-│       ├── dashboard/
-│       ├── protected/
-│       └── urinalysis/
-└── server/
-    ├── node_modules/
-    ├── prisma/
-    └── src/
-        ├── middleware/
-        ├── routes/
-        └── utils/
+    .
+    ├── python/urinalysis/
+    │   ├── training/
+    │   ├── server.py
+    │   └── urinalysis.py
+    ├── rinon/
+    │   ├── .next/
+    │   ├── node_modules/
+    │   ├── public/
+    │   └── src/app/
+    │       ├── auth/
+    │       ├── ct/
+    │       ├── dashboard/
+    │       ├── protected/
+    │       └── urinalysis/
+    └── server/
+        ├── node_modules/
+        ├── prisma/
+        └── src/
+            ├── middleware/
+            ├── routes/
+            └── utils/
 
 ----
 
